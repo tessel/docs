@@ -136,7 +136,7 @@ Creates a SPI object. Options is an object specifying any of the following:
 * **chipSelectActive** (default `"low"`) &mdash; If a **chipSelect** pin is specified, this defines the polarity of the CS line when *active*.
 * **role** (default `master`) &mdash; Determines the role the SPI channel plays, either "master" or "slave". (Slave currently not supported.)
 
-/*
+<!--
 
 spi.setClockSpeed ( mhz, [callback(err)] ) 
 Set the SPI output speed to the number `mhz`.
@@ -147,7 +147,7 @@ Set CPOL (SPI polarity).
 spi.setCPHA ( `cpha`, [`callback(err)`] ) 
 Set CPHA (SPI bit significance).
 
-*/
+-->
 
 spi.transfer ( txbuf, callback(err, rxbuf) )
 Transfers a Buffer `txbuf` to the slave and receives a response in `rxbuf`. 
