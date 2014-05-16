@@ -45,14 +45,14 @@ An array of LEDs available on the Tessel board (1&ndash;4). These are [`Pin` obj
 
 ### Modules
 
-API Documentation for each of Tessel's modules can be found on the individual modules' pages. We are in the process of opening up the module repos. So far, we have available:  
+API Documentation for each of Tessel's modules can be found on the individual modules' pages. We are in the process of opening up the module repos. So far, we have available:
 
- * [Accelerometer<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/accel-mma84)
- * [Ambient<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/ambient-attx4)
- * [Climate<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/climate-si7005)
- * [GPS<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/gps-a2235h)
- * [Relay<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/relay-mono)
- * [Servo<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/servo-pca9685)
+* [Accelerometer<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/accel-mma84)
+* [Ambient<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/ambient-attx4)
+* [Climate<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/climate-si7005)
+* [GPS<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/gps-a2235h)
+* [Relay<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/relay-mono)
+* [Servo<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/servo-pca9685)
 
 ### Pins
 
@@ -106,7 +106,7 @@ Digital pins: 1. Analog pins: ADC resolution of output pins (e.g. 1024 for Tesse
 &#x20;<a href="#api-string-pin-direction" name="api-string-pin-direction">#</a> <i>string</i>&nbsp; pin<b>.direction</b>  
 "output" or "input".
 
-&#x20;<a href="#api-pin-input" name="api-pin-setInput-callback-err">#</a> pin<b>.input</b>()  
+&#x20;<a href="#api-pin-input" name="api-pin-input">#</a> pin<b>.input</b>()  
 Set `pin` to be an input.
 
 &#x20;<a href="#api-pin-output-initial" name="api-pin-output-initial">#</a> pin<b>.output</b> ( [initial] )  
@@ -115,7 +115,7 @@ Set `pin` to be an output with an initial value
 &#x20;<a href="#api-pin-write-value" name="api-pin-write-value">#</a> pin<b>.write</b> ( value )  
 Write the `value` to an output pin. Digital pins: output is set HIGH if `value` is truthy, otherwise LOW. Analog pins: `value` is a float that sets the analog output value.
 
-&#x20;<a href="#api-pin-read" name="api-pin-read">#</a> pin<b>.read</b> ( )  
+&#x20;<a href="#api-pin-read" name="api-pin-read">#</a> pin<b>.read</b> ()  
 Read a digital `value` from a digital input pin. `1` is returned if the value is HIGH, otherwise `0` if LOW.
 
 &#x20;<a href="#api-pin-watch-type-callback-err-time-type" name="api-pin-watch-type-callback-err-time-type">#</a> pin<b>.watch</b> ( [type,] callback(err, time, type) )  
@@ -159,7 +159,6 @@ Creates a SPI object. Options is an object specifying any of the following:
 
 &#x20;<a href="#api-spi-transfer-txbuf-callback-err-rxbuf" name="api-spi-transfer-txbuf-callback-err-rxbuf">#</a> spi<b>.transfer</b> ( txbuf, callback(err, rxbuf) )  
 Transfers a Buffer `txbuf` to the slave and receives a response in `rxbuf`.
-
 
 &#x20;<a href="#api-spi-receive-len-callback-err-rxbuf" name="api-spi-receive-len-callback-err-rxbuf">#</a> spi<b>.receive</b> ( len, callback(err, rxbuf) )  
 Reads `len` bytes from a slave.
