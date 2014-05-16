@@ -45,14 +45,14 @@ An array of LEDs available on the Tessel board (1&ndash;4). These are [`Pin` obj
 
 ### Modules
 
-API Documentation for each of Tessel's modules can be found on the individual modules' pages. We are in the process of opening up the module repos. So far, we have available:  
+API Documentation for each of Tessel's modules can be found on the individual modules' pages. We are in the process of opening up the module repos. So far, we have available:
 
- * [Accelerometer<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/accel-mma84)
- * [Ambient<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/ambient-attx4)
- * [Climate<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/climate-si7005)
- * [GPS<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/gps-a2235h)
- * [Relay<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/relay-mono)
- * [Servo<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/servo-pca9685)
+* [Accelerometer<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/accel-mma84)
+* [Ambient<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/ambient-attx4)
+* [Climate<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/climate-si7005)
+* [GPS<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/gps-a2235h)
+* [Relay<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/relay-mono)
+* [Servo<img src="https://s3.amazonaws.com/technicalmachine-assets/fre+assets/external-link.png">](https://github.com/tessel/servo-pca9685)
 
 ### Pins
 
@@ -62,10 +62,10 @@ GPIO access for digital and analog signal lines. Each port exposes its available
 var tessel = require('tessel'); // import tessel
 var gpio = tessel.port['GPIO']; // select the GPIO port
 gpio.digital.map(function (pin, i) {
-	console.log('Value of digital pin', i, '=', pin.readSync());
+	console.log('Value of digital pin', i, '=', pin.read());
 })
 gpio.analog.map(function (pin, i) {
-	console.log('Value of analog pin', i, '=', pin.readSync() * pin.resolution, '/', pin.resolution);
+	console.log('Value of analog pin', i, '=', pin.read() * pin.resolution, '/', pin.resolution);
 })
 ```
 
@@ -106,26 +106,20 @@ Digital pins: 1. Analog pins: ADC resolution of output pins (e.g. 1024 for Tesse
 &#x20;<a href="#api-string-pin-direction" name="api-string-pin-direction">#</a> <i>string</i>&nbsp; pin<b>.direction</b>  
 "output" or "input".
 
-&#x20;<a href="#api-pin-setInput-callback-err" name="api-pin-setInput-callback-err">#</a> pin<b>.setInput</b>( [callback(err)] )  
-Set `pin` to be an input. Sets `err` if the pin cannot be used as an input.
+&#x20;<a href="#api-pin-input" name="api-pin-input">#</a> pin<b>.input</b>()  
+Set `pin` to be an input.
 
-&#x20;<a href="#api-pin-setOutput-initial-callback-err" name="api-pin-setOutput-initial-callback-err">#</a> pin<b>.setOutput</b> ( [initial], [callback(err)] )  
-Set `pin` to be an output. Sets `err` if the pin cannot be used as an output.
+&#x20;<a href="#api-pin-output-initial" name="api-pin-output-initial">#</a> pin<b>.output</b> ( [initial] )  
+Set `pin` to be an output with an initial value
 
-&#x20;<a href="#api-pin-write-value-callback-err" name="api-pin-write-value-callback-err">#</a> pin<b>.write</b> ( value, [callback(err)] )  
-Write the `value` to an output pin. Digital pins: output is set HIGH if `value` is truthy, otherwise LOW. Analog pins: `value` is a float that sets the analog output value. Sets `err` if the pin cannot be used as a digital output or is not configured as an output.
+&#x20;<a href="#api-pin-write-value" name="api-pin-write-value">#</a> pin<b>.write</b> ( value )  
+Write the `value` to an output pin. Digital pins: output is set HIGH if `value` is truthy, otherwise LOW. Analog pins: `value` is a float that sets the analog output value.
 
-&#x20;<a href="#api-pin-writeSync-value" name="api-pin-writeSync-value">#</a> pin<b>.writeSync</b> ( value )  
-Synchronous version of `pin.write`. Throws on error.
-
-&#x20;<a href="#api-pin-read-callback-err-value" name="api-pin-read-callback-err-value">#</a> pin<b>.read</b> ( callback(err, value) )  
-Read a digital `value` from a digital input pin. `1` is returned if the value is HIGH, otherwise `0` if LOW. Sets `err` if the pin cannot be used as a digital input or is not configured as an input. An error is given to the callback if the pin cannot be used as a digital input or is not configured as an input.
-
-&#x20;<a href="#api-pin-readSync-number" name="api-pin-readSync-number">#</a> pin<b>.readSync</b> () &rarr; <i>number</i>  
-Synchronous version of `pin.read`. Throws on error.
+&#x20;<a href="#api-pin-read" name="api-pin-read">#</a> pin<b>.read</b> ()  
+Read a digital `value` from a digital input pin. `1` is returned if the value is HIGH, otherwise `0` if LOW.
 
 &#x20;<a href="#api-pin-watch-type-callback-err-time-type" name="api-pin-watch-type-callback-err-time-type">#</a> pin<b>.watch</b> ( [type,] callback(err, time, type) )  
-Sets a listener for a signal edge on `pin`. `type` can be one of "rise", "fall", "change", or omitted (analogous to "change"). Watched events registers events on the `pin` object, with the same `type` as the event.
+Sets a listener for a signal edge on `pin`. `type` can be one of "rise", "fall", "change", "high", "low" or omitted (analogous to "change"). Watched events registers events on the `pin` object, with the same `type` as the event.
 
 &#x20;<a href="#api-pin-unwatch-type-listener" name="api-pin-unwatch-type-listener">#</a> pin<b>.unwatch</b> ( [type,] listener )  
 Removes the listener for a signal.
@@ -166,20 +160,11 @@ Creates a SPI object. Options is an object specifying any of the following:
 &#x20;<a href="#api-spi-transfer-txbuf-callback-err-rxbuf" name="api-spi-transfer-txbuf-callback-err-rxbuf">#</a> spi<b>.transfer</b> ( txbuf, callback(err, rxbuf) )  
 Transfers a Buffer `txbuf` to the slave and receives a response in `rxbuf`.
 
-&#x20;<a href="#api-spi-transferSync-txbuf-Buffer" name="api-spi-transferSync-txbuf-Buffer">#</a> spi<b>.transferSync</b> ( txbuf ) &rarr; <i>Buffer</i>  
-Synchronous version of `spi.transfer`. Throws on error.
-
 &#x20;<a href="#api-spi-receive-len-callback-err-rxbuf" name="api-spi-receive-len-callback-err-rxbuf">#</a> spi<b>.receive</b> ( len, callback(err, rxbuf) )  
 Reads `len` bytes from a slave.
 
-&#x20;<a href="#api-spi-receiveSync-len-Buffer" name="api-spi-receiveSync-len-Buffer">#</a> spi<b>.receiveSync</b> ( len ) &rarr; <i>Buffer</i>  
-Synchronous version of `spi.receive`. Throws on error.
-
 &#x20;<a href="#api-spi-send-txbuf-callback-err" name="api-spi-send-txbuf-callback-err">#</a> spi<b>.send</b> ( txbuf, callback(err) )  
 Sends a Buffer `txbuf` to the slave.
-
-&#x20;<a href="#api-spi-sendSync-txbuf" name="api-spi-sendSync-txbuf">#</a> spi<b>.sendSync</b> ( txbuf )  
-Synchronous version of `spi.send`. Throws on error.
 
 &#x20;<a href="#api-spi-emits-ready" name="api-spi-emits-ready">#</a> spi &rarr; <i>emits "ready"</i>  
 Emitted when the connection has begun. Code should wait until the "ready" event is fired before performing operations.
